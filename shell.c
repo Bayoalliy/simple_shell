@@ -1,6 +1,5 @@
 #include <stdio.h>
 #include <string.h>
-#include <stdlib.h>
 #include <unistd.h>
 #include <sys/types.h>
 #include <sys/wait.h>
@@ -42,9 +41,6 @@ int main(int ac, char **av)
 		pid = fork();
 		if (pid == 0)
 		{
-			if (strlen(argv[0]) == 0)
-				return (1);
-
 			if (execve(argv[0], argv, environ) == -1)
 				perror(av[ac - 1]);
 		}
