@@ -24,7 +24,7 @@ int main(int ac, char **av)
 
 	while (1)
 	{
-		printf("#cisfun$ ");
+		write(STDIN_FILENO, "#cisfun$ ", 9);
 		if (getline(&line, &len, stdin) < 0)
 		{
 			return (1);
