@@ -15,6 +15,7 @@
  */
 int main(int ac, char **av)
 {
+	extern char **environ;
 	char *argv[] = {NULL, NULL, NULL, NULL};
 	char *line = NULL;
 	size_t pid, len = 0;
@@ -44,7 +45,7 @@ int main(int ac, char **av)
 			if (strlen(argv[0]) == 0)
 				return (1);
 
-			if (execve(argv[0], argv, NULL) == -1)
+			if (execve(argv[0], argv, environ) == -1)
 				perror(av[ac - 1]);
 		}
 		else
