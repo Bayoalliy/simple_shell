@@ -26,7 +26,7 @@ int main(int ac, char **av)
 		write(STDIN_FILENO, "#cisfun$ ", 9);
 		if (getline(&line, &len, stdin) < 0)
 		{
-			return (1);
+			return (0);
 		}
 		itr = line;
 
