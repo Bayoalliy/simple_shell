@@ -22,11 +22,11 @@ char** split_line(char *line)
         return(NULL);
     }
 
-    arr = malloc(sizeof(char *));
+    arr = malloc(sizeof(char *) * 4);
     *arr = word;
     while((word = strtok(NULL, " ")))
     {
-        arr = realloc(arr, sizeof(char *) * (n + 2));
+        /*arr = realloc(arr, sizeof(char *) * (n + 2));*/
         *(arr + n) = word;
         n++;
     }
