@@ -1,5 +1,39 @@
 #include "header.h"
 
+/*
+char** split_line(char *line)
+{
+    char *word = strtok(line, " ");
+    char **arr;
+    char *itr = line;
+    int n = 1;
+
+   */ /*remove line break from line.*//*
+    while (*itr)
+    {
+        if (*itr == '\n')
+            *itr = '\0';
+        itr++;
+    }
+
+    if(!word)
+    {
+        return(NULL);
+    }
+
+    arr = malloc(sizeof(char *));
+    *arr = word;
+    while((word = strtok(NULL, " ")))
+    {
+        arr = realloc(arr, sizeof(char *) * (n + 2));
+        *(arr + n) = word;
+        n++;
+    }
+    *(arr + n) = NULL;
+
+    return(arr);
+}
+*/
 /**
  * main - simple shell
  *
@@ -22,7 +56,7 @@ int main(int ac, char **av)
 		write(STDIN_FILENO, "#cisfun$ ", 9);
 		if (getline(&line, &len, stdin) < 0)
 		{
-			free(line);
+			/*free(line);*/
 			exit(0);
 		}
 		itr = line;
