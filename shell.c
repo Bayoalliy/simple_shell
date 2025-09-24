@@ -1,9 +1,42 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <unistd.h>
-#include <sys/types.h>
-#include <sys/wait.h>
+#include "header.h"
+
+
+char** split_line(char *line)
+{
+    char *word = strtok(line, " ");
+	char **arr;
+	char *itr = line;
+
+	/*remove line break from line.*/
+	while (*itr)
+	{
+		if (*itr == '\n')
+			*itr = '\0';
+		itr++;
+	}
+
+    if(!word)
+	{
+        return(NULL);
+	}
+    
+	int n = 1;
+    arr = malloc(sizeof(char *));
+    *arr = word;
+    while((word = strtok(NULL, " ")))
+    {
+        arr = realloc(arr, sizeof(char *) * (n + 2));
+        *(arr + n) = word;
+        n++;
+    }
+    *(arr + n) = NULL;
+
+    return(arr);
+}
+
+
+
+
 
 /**
  * main - simple shell
@@ -16,11 +49,10 @@
 int main(int ac, char **av)
 {
 	extern char **environ;
-	char *argv[] = {NULL, NULL, NULL, NULL};
 	char *line = NULL;
 	size_t pid, len = 0;
-	char *itr;
 	int status;
+	char **argv;
 
 	while (1)
 	{
@@ -30,19 +62,14 @@ int main(int ac, char **av)
 			free(line);
 			exit(0);
 		}
-		itr = line;
 
-		while (*itr)
-		{
-			if (*itr == '\n')
-				*itr = '\0';
-			itr++;
-		}
-		argv[0] = line;
-
+		argv = split_line(line);
 		pid = fork();
 		if (pid == 0)
 		{
+			if(!(**argv))
+				exit(0);
+
 			if (execve(argv[0], argv, environ) == -1)
 			{
 				perror(av[ac - 1]);
