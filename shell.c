@@ -37,9 +37,9 @@ int main(int ac, char **av)
 		pid = fork();
 		if (pid == 0)
 		{
-			/*if(!(**argv))
+			if(!(**argv))
 				exit(0);
-			*/
+			
 			if (execve(argv[0], argv, environ) == -1)
 			{
 				perror(av[ac - 1]);
