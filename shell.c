@@ -1,14 +1,14 @@
 #include "header.h"
 
-/*
+
 char** split_line(char *line)
 {
-    char *word = strtok(line, " ");
+    char *word;
     char **arr;
     char *itr = line;
     int n = 1;
 
-   */ /*remove line break from line.*//*
+   /*remove line break from line.*/
     while (*itr)
     {
         if (*itr == '\n')
@@ -16,6 +16,7 @@ char** split_line(char *line)
         itr++;
     }
 
+    word = strtok(line, " ");
     if(!word)
     {
         return(NULL);
@@ -33,7 +34,7 @@ char** split_line(char *line)
 
     return(arr);
 }
-*/
+
 /**
  * main - simple shell
  *
@@ -48,8 +49,7 @@ int main(int ac, char **av)
 	char *line = NULL;
 	size_t pid, len = 0;
 	int status;
-	char *argv[] = {NULL, NULL, NULL, NULL};
-	char *itr;
+	char **argv;
 
 	while (1)
 	{
@@ -59,15 +59,8 @@ int main(int ac, char **av)
 			free(line);
 			exit(0);
 		}
-		itr = line;
 
-		while (*itr)
-		{
-			if (*itr == '\n')
-				*itr = '\0';
-			itr++;
-		}
-		argv[0] = line;
+		argv = split_line(line);
 		pid = fork();
 		if (pid == 0)
 		{
@@ -76,6 +69,7 @@ int main(int ac, char **av)
 			
 			if (execve(argv[0], argv, environ) == -1)
 			{
+				free(argv);
 				perror(av[ac - 1]);
 				exit(1);
 			}
