@@ -6,6 +6,7 @@ char** split_line(char *line)
     char *word = strtok(line, " ");
 	char **arr;
 	char *itr = line;
+	int n = 1;
 
 	/*remove line break from line.*/
 	while (*itr)
@@ -20,7 +21,6 @@ char** split_line(char *line)
         return(NULL);
 	}
     
-	int n = 1;
     arr = malloc(sizeof(char *));
     *arr = word;
     while((word = strtok(NULL, " ")))
