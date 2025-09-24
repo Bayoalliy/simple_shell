@@ -72,6 +72,7 @@ int main(int ac, char **av)
 			*/
 			if (execve(argv[0], argv, environ) == -1)
 			{
+				free(argv);
 				perror(av[ac - 1]);
 				exit(1);
 			}
