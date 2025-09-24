@@ -56,7 +56,7 @@ int main(int ac, char **av)
 		write(STDIN_FILENO, "#cisfun$ ", 9);
 		if (getline(&line, &len, stdin) < 0)
 		{
-			/*free(line);*/
+			free(line);
 			exit(0);
 		}
 		itr = line;
