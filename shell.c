@@ -15,6 +15,7 @@ int main(int ac, char **av)
 	size_t pid, len = 0;
 	int status;
 	char *argv[] = {NULL, NULL, NULL, NULL};
+	char *itr;
 
 	while (1)
 	{
@@ -24,7 +25,14 @@ int main(int ac, char **av)
 			free(line);
 			exit(0);
 		}
+		itr = line;
 
+		while (*itr)
+		{
+			if (*itr == '\n')
+				*itr = '\0';
+			itr++;
+		}
 		argv[0] = line;
 		pid = fork();
 		if (pid == 0)
