@@ -1,10 +1,10 @@
 #include "header.h"
 
 
-char** split_line(char *line)
+char** split_line(char *line, char **arr)
 {
     char *word;
-    char **arr;
+    /*char **arr;*/
     char *itr = line;
     int n = 1;
 
@@ -22,7 +22,7 @@ char** split_line(char *line)
         return(NULL);
     }
 
-    arr = malloc(sizeof(char *) * 4);
+    /*arr = malloc(sizeof(char *) * 4);*/
     *arr = word;
     while((word = strtok(NULL, " ")))
     {
@@ -49,7 +49,7 @@ int main(int ac, char **av)
 	char *line = NULL;
 	size_t pid, len = 0;
 	int status;
-	char **argv;
+	char *argv[] = {NULL, NULL, NULL, NULL};
 
 	while (1)
 	{
@@ -60,7 +60,7 @@ int main(int ac, char **av)
 			exit(0);
 		}
 
-		argv = split_line(line);
+		split_line(line, argv);
 		pid = fork();
 		if (pid == 0)
 		{
@@ -69,7 +69,7 @@ int main(int ac, char **av)
 			
 			if (execve(argv[0], argv, environ) == -1)
 			{
-				free(argv);
+				/*free(argv);*/
 				perror(av[ac - 1]);
 				exit(1);
 			}
