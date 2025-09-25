@@ -9,10 +9,10 @@
  * @arr: will store the splitted line.
  * Return: array of strings.
  */
-char** split_line(char *line)
+char** split_line(char *line, char **arr)
 {
     char *word;
-    char **arr;
+    /*char **arr;*/
     char *itr = line;
     int n = 1;
 
@@ -30,7 +30,7 @@ char** split_line(char *line)
         return(NULL);
     }
 
-    arr = malloc(sizeof(char *) * 4);
+    /*arr = malloc(sizeof(char *) * 4);*/
     *arr = word;
     while((word = strtok(NULL, " ")))
     {
