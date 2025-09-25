@@ -27,11 +27,11 @@ int main(int ac, char **av)
 		}
 
 		split_line(line, argv);
+		if(!(*argv))
+			continue;
 		pid = fork();
 		if (pid == 0)
 		{
-			if(!(*argv))
-				exit(0);
 			
 			if (execve(argv[0], argv, environ) == -1)
 			{
