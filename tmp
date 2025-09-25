@@ -15,7 +15,7 @@ int main(int ac, char **av)
 	char *line = NULL;
 	size_t pid, len = 0;
 	int status;
-	char **argv;
+	char *argv[] = {NULL, NULL, NULL, NULL};
 
 	while (1)
 	{
@@ -26,8 +26,8 @@ int main(int ac, char **av)
 			exit(0);
 		}
 
-		argv = split_line(line);
-		if(!(argv))
+		split_line(line, argv);
+		if(!(*argv))
 			continue;
 		pid = fork();
 		if (pid == 0)
@@ -35,7 +35,7 @@ int main(int ac, char **av)
 			
 			if (execve(argv[0], argv, environ) == -1)
 			{
-				free(argv);
+				/*free(argv);*/
 				perror(av[ac - 1]);
 				exit(1);
 			}

@@ -8,6 +8,6 @@
 #include <sys/types.h>
 #include <sys/wait.h>
 
-char** split_line(char *line, char **arr);
+char** split_line(char *line);
 
 #endif
