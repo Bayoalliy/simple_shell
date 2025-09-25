@@ -65,7 +65,7 @@ int main(int ac, char **av)
 		if (pid == 0)
 		{
 			if(!(**argv))
-				exit(0);
+				exit(1);
 			
 			if (execve(argv[0], argv, environ) == -1)
 			{
